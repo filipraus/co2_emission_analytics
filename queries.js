@@ -16,7 +16,7 @@ const getShipments = (request, response) => {
     text: `
       SELECT * FROM co2_emission_analytics.shipments 
       LEFT OUTER JOIN co2_emission_analytics.shipment_co2_emissions 
-        ON co2_emission_analytics.shipments.id=co2_emission_analytics.shipment_co2_emissions.shipment_id 
+        ON co2_emission_analytics.shipments.id = co2_emission_analytics.shipment_co2_emissions.shipment_id 
       WHERE pickup_time >= $1 AND pickup_time <= $2 AND 
         dropoff_time >= $1 AND dropoff_time <= $2
       ORDER BY co2_emission_analytics.shipments.dropoff_time ASC;
@@ -28,6 +28,7 @@ const getShipments = (request, response) => {
     if (err) {
       console.log(err); 
     } else {
+      console.log(res.rows);
       response.json(res.rows);
     }
   });

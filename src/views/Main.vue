@@ -8,6 +8,19 @@
       placeholder="Select pickup and dropoff time"
       @update:modelValue="getShipments"
     />
+    <div class='select-wrapper'>
+      <span>Emission type: </span>
+      <select 
+        class='dp-input' 
+        v-model="typeOfCalculations" 
+        @change="getShipments"
+      >
+        <option value="any">Any</option>
+        <option value="default">Default</option>
+        <option value="modeled">Modeled</option>
+        <option value="primary">Primary</option>
+      </select>
+    </div>
     <Shipments :shipments="shipments"/>
   </main>
 </template>
@@ -27,17 +40,27 @@ export default {
     return {
       date: ref(),
       startDate: ref(new Date(2021, 4)),
+      typeOfCalculations: 'any',
       shipments: []
     }
   },
   methods: {
-    formatShipments(shipments) {
-      return shipments.map(shipment => {
+    formatShipments() {
+      this.shipments.map(shipment => {
         shipment.pickup_time = this.formatTime(shipment.pickup_time);
         shipment.dropoff_time = this.formatTime(shipment.dropoff_time);
         shipment.co2_emission = parseFloat(shipment.co2_emission).toFixed(2);
         return shipment;
       });
+    },
+    filterShipments() {
+      this.shipments = this.shipments.filter(shipment => {
+        if (this.typeOfCalculations == 'any') {
+          return shipment;
+        } else if (shipment.type_of_calculations === this.typeOfCalculations) {
+          return shipment;
+        }
+      })
     },
     formatTime(time) {
       return (new Date(time)).toLocaleString('en-US', {
@@ -61,10 +84,12 @@ export default {
         headers: { 'Content-Type': 'application/json' }
       }
 
-      fetch(`http://localhost:3000/get_shipments/${this.pickupTime()}/${this.dropoffTime()}`, options)
+      fetch(`http://localhost:3000/get_shipments/${this.pickupTime()}/${this.dropoffTime()}}`, options)
         .then(res => res.json())
         .then(res => {
-          this.shipments = this.formatShipments(res);
+          this.shipments = res;
+          this.formatShipments();
+          this.filterShipments();
         }).catch(err => console.log(err));
     }
   }
@@ -76,5 +101,21 @@ main {
   max-width: 1200px;
   max-height: 800px;
   margin: 0 auto;
+}
+
+.select-wrapper {
+  text-align: left;
+}
+
+select {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  height: 38px;
+  line-height: 1.5rem;
+  margin-top: 16px;
+  padding: 6px 12px;
+  outline: none;
 }
 </style>

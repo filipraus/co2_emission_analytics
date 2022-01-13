@@ -8,6 +8,7 @@
         <th>Pickup Time</th>
         <th>Dropoff Time</th>
         <th>CO2 Emission</th>
+        <th>Emission Type</th>
       </tr>
       <tr v-for='shipment in shipments'>
         <td>{{ shipment.shipment_id }}</td>
@@ -16,6 +17,7 @@
         <td>{{ shipment.pickup_time }}</td>
         <td>{{ shipment.dropoff_time }}</td>
         <td>{{ shipment.co2_emission }}</td>
+        <td>{{ shipment.type_of_calculations }}</td>
       </tr>
     </table>
   </div>
@@ -31,7 +33,7 @@ export default {
 .table-wrapper {
   border: 1px solid #ddd;
   border-radius: 4px;
-  max-height: calc(100vh - 153px);
+  max-height: calc(100vh - 207px);
   margin: 1rem 0; 
   overflow: hidden;
   overflow-y: scroll;
