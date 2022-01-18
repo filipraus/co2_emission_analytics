@@ -86,14 +86,10 @@ export default {
         headers: { 'Content-Type': 'application/json' }
       }
 
-      console.log('Fetching shipments....');
-      console.log(this.shipments);
-
       fetch(`http://localhost:3000/get_shipments/${this.pickupTime()}/${this.dropoffTime()}}`, options)
         .then(res => res.json())
         .then(res => {
           this.formatShipments(res);
-          console.log(this.shipments);
         }).catch(err => console.log(err));
     }
   }
