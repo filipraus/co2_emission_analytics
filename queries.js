@@ -1,10 +1,10 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'test',
+  user: 'co2_analyst',
   host: 'localhost',
-  database: 'homeworks',
-  password: 'TestUser',
+  database: 'shipments',
+  password: 'co2_analyst',
   port: 5432,
 });
 
@@ -14,12 +14,11 @@ const getShipments = (request, response) => {
 
   const query = {
     text: `
-      SELECT * FROM co2_emission_analytics.shipments 
+      SELECT DISTINCT type_of_calculations, * FROM co2_emission_analytics.shipments
       LEFT OUTER JOIN co2_emission_analytics.shipment_co2_emissions 
         ON co2_emission_analytics.shipments.id = co2_emission_analytics.shipment_co2_emissions.shipment_id 
       WHERE pickup_time >= $1 AND pickup_time <= $2 AND 
-        dropoff_time >= $1 AND dropoff_time <= $2
-      ORDER BY co2_emission_analytics.shipments.dropoff_time ASC;
+        dropoff_time >= $1 AND dropoff_time <= $2;
     `,
     values: [pickup_time, dropoff_time]
   }
