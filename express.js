@@ -18,9 +18,8 @@ app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 })
 
-app.route('/*')
-  .get(function(req, res) {
-    res.sendFile(path.join(__dirname + '/dist/index.html'));
-  });
+app.get('/', (req,res) => {
+  res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
+});
 
 app.get(`/get_shipments/:pickup_time/:dropoff_time`, db.getShipments);
