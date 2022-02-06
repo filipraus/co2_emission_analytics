@@ -19,7 +19,7 @@ app.listen(port, () => {
 })
 
 app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname, '../my-app/build/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 app.get(`/get_shipments/:pickup_time/:dropoff_time`, db.getShipments);
