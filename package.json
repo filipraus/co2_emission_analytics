@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "postinstall": "npm run build",
-    "start": "node express.js && npm run serve",
-    "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "start": "node express.js",
+    "serve": "npm run serve",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
     "lint": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service lint"
   },
