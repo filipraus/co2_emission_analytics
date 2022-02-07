@@ -12,10 +12,13 @@ const httpPort = 80
 
 const history = require('connect-history-api-fallback');
 
+const staticFileMiddleware = express.static('dist');
+app.use(staticFileMiddleware);
+app.use(history());
+app.use(staticFileMiddleware);
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(history());
 app.use(
   bodyParser.urlencoded({
     extended: true,
