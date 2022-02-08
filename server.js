@@ -26,4 +26,4 @@ app.get('/', (req,res) => {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-app.get(`/get_shipments/:pickup_time/:dropoff_time`, db.getShipments);
+app.get(`https://co2emissionanalytics.herokuapp.com/get_shipments/:pickup_time/:dropoff_time`, db.getShipments);

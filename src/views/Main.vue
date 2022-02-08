@@ -86,7 +86,7 @@ export default {
         headers: { 'Content-Type': 'application/json' }
       }
 
-      fetch(`http://localhost:3000/get_shipments/${this.pickupTime()}/${this.dropoffTime()}}`, options)
+      fetch(`/get_shipments/${this.pickupTime()}/${this.dropoffTime()}}`, options)
         .then(res => res.json())
         .then(res => {
           this.formatShipments(res);
