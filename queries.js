@@ -1,17 +1,14 @@
 require('dotenv').config()
 const { Pool } = require('pg');
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const connectionString = `
   postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE};
 `;
 
 const pool = new Pool({
-  // user: 'co2_analyst',
-  // host: 'localhost',
-  // database: 'shipments',
-  // password: 'co2_analyst',
-  // port: 5432,
-  connectionString: connectionString,
+  connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
   ssl: {
     rejectUnauthorized: false,
   }
