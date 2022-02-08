@@ -1,12 +1,17 @@
+require('dotenv').config()
 const { Pool } = require('pg');
 
+const connectionString = `
+  postgres://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE};
+`;
+
 const pool = new Pool({
-  user: 'co2_analyst',
-  host: 'localhost',
-  database: 'shipments',
-  password: 'co2_analyst',
-  port: 5432,
-  connectionString: 'postgres://atrnguffvnrdht:1e9c4240ab65fea32cbdcebb006063be337664b6345721991301d2ad34b845a6@ec2-34-205-46-149.compute-1.amazonaws.com:5432/d7u1gmb1cpqsht',
+  // user: 'co2_analyst',
+  // host: 'localhost',
+  // database: 'shipments',
+  // password: 'co2_analyst',
+  // port: 5432,
+  connectionString: connectionString,
   ssl: {
     rejectUnauthorized: false,
   }
