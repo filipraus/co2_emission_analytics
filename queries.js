@@ -6,6 +6,10 @@ const pool = new Pool({
   database: 'shipments',
   password: 'co2_analyst',
   port: 5432,
+  connectionString: 'postgres://atrnguffvnrdht:1e9c4240ab65fea32cbdcebb006063be337664b6345721991301d2ad34b845a6@ec2-34-205-46-149.compute-1.amazonaws.com:5432/d7u1gmb1cpqsht',
+  ssl: {
+    rejectUnauthorized: false,
+  }
 });
 
 const getShipments = (request, response) => {
